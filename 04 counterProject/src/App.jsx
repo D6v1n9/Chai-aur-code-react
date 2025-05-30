@@ -29,6 +29,13 @@ function App() {
     // setCounter(counter);
     if(counter< 20) {
       setCounter(counter+1)
+      // setCounter(counter+1)
+      // setCounter(counter+1)    //No update in value as bundler will send it only once thus only 1 increment
+      // setCounter have a callBack with recievs the last value of counter
+      setCounter((prevCounter)=>(prevCounter+1)) // Syntax 1
+      setCounter(prevCounter => prevCounter+1) // Syntax 2  JS basic
+      
+      //https://youtu.be/tOYkV6Yhrhs?list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&t=339
     }
   }
   function decreaseValue() {
