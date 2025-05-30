@@ -1,25 +1,19 @@
-<<<<<<< HEAD
+
 //index.js file
 
 function customRender(reactElement, container) {
-    
-=======
+
 // This file will render the element into index.html file similar to index.js in react
 
 function customRender(reactElement, container) {
     /*
->>>>>>> c1dc7a0b19926638031a31ddcb15ab8ba8f97eb1
     const domElement = document.createElement(reactElement.type)
     domElement.innerHTML = reactElement.children
     domElement.setAttribute('href', reactElement.props.href)
     domElement.setAttribute('target', reactElement.props.target)
 
-    container.appendChild(domElement)
-<<<<<<< HEAD
-    
+    container.appendChild(domElement)    
 }
-
-=======
     */
 
     const domElement = document.createElement(reactElement.type)
@@ -32,7 +26,6 @@ function customRender(reactElement, container) {
     
 }
  // the react element is parsed (Internally react also do the same for the element)
->>>>>>> c1dc7a0b19926638031a31ddcb15ab8ba8f97eb1
 const reactElement = {
     type: 'a',
     props: {
