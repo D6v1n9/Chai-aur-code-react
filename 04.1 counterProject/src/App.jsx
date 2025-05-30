@@ -27,10 +27,14 @@ function App() {
   function increaseValue() {
     // counter = counter+1;
     // setCounter(counter);
-    setCounter(counter+1);
+    if(counter< 20) {
+      setCounter(counter+1)
+    }
   }
   function decreaseValue() {
-    setCounter(counter-1);
+    if(counter > 0) {
+      setCounter(counter-1);
+    }
   }
 
   return(
