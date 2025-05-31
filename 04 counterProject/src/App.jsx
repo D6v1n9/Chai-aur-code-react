@@ -31,7 +31,7 @@ function App() {
       setCounter(counter+1)
       // setCounter(counter+1)
       // setCounter(counter+1)    //No update in value as bundler will send it only once thus only 1 increment
-      // setCounter have a callBack with recievs the last value of counter
+      // setCounter have a callBack which recievs the last value of counter
       setCounter((prevCounter)=>(prevCounter+1)) // Syntax 1
       setCounter(prevCounter => prevCounter+1) // Syntax 2  JS basic
       
