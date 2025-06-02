@@ -18,7 +18,8 @@ useState is a React Hook that lets you add a state variable to your component.
 - The set function returned by useState lets you update the state to a different value and trigger a re-render. 
 - You can pass the next state directly, or a function that calculates it from the previous state: ```setState((prevState) => prevState + 1)```
 ### Returns 
-useState returns an array with exactly two values:
+- useState returns an array with exactly two values:
+- ***(#NOTE) set functions do not have a return value.***
 
 
 ## useCallback()
