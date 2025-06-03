@@ -139,3 +139,10 @@
         ```
     - Main Reason of this was to understand How you surpassed a step of passing props by creating a Context 
     - So now you can create Context of different role and whenever required you can access the value from there or you can also store the data of an API there and use it 
+
+### Real-world need
+- In real-world projects, the React Context API helps manage global state and share data across components without the need for prop drilling. For instance, in a project, Context can be used to manage user authentication, themes, or shared logic like Firebase access, making such functionalities available throughout the application with just one import.
+- For example, in a web application, a developer might use Context to manage the current user's authentication status and provide this information to various components that require it, such as navigation bars or protected routes.
+ This approach simplifies the codebase and improves maintainability by avoiding the need to pass authentication-related props through multiple layers of components.
+
+- Similarly, theme management is another common use case for Context. By using Context, developers can easily apply and switch themes across the entire application, ensuring consistency without manually updating each component.
