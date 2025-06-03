@@ -44,7 +44,7 @@
         - For Dynamic Rendering
         - For this 
         ```import Outler from react-router-dom```
-        - Outlet uses this Layout as base and Outler tag will be Dynamic
+        - Outlet uses this Layout as base and Outlet tag will be Dynamic
         - ``` javascript
             import { Outlet } from "react-router-dom";
             // Outlet uses this Layout as base and Outler tag will be Dynamic
@@ -90,9 +90,9 @@
                 const router = createBrowserRouter(
                 createRoutesFromElements(
                     <Route path='/' element={<Layout/>}>
-                    <Route path='' element={<Home/>}/>
-                    <Route path='about' element={<About/>}/>
-                    <Route path='contact-us' element={<Contact/>}/>
+                        <Route path='' element={<Home/>}/>
+                        <Route path='about' element={<About/>}/>
+                        <Route path='contact-us' element={<Contact/>}/>
                     </Route>
                 )
                 )
