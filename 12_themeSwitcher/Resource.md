@@ -140,3 +140,11 @@ export default {
 
 
 ```
+
+## In updated tailwind for using Themeswithc
+```javascript
+// inside index.css
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
