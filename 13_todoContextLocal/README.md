@@ -237,3 +237,6 @@
         );
     }
     ```
+
+- Check for the Local storage working by refreshing the page
+- Inside application and localstorage in browser
