@@ -26,6 +26,7 @@ Redux helps you store and manage all your app’s data (state) in one place, mak
 💡 You can think of **Redux** as the **engine**, and **React-Redux** as the **bridge** between the engine and your car (**React components**).
 
 
+
 ## Step-1 : Setting up for Redux    
 - Create app folder with store.js (it can be placed any where but inside src )
 and import configStore
@@ -206,3 +207,9 @@ export main source export
 
 4. **Take Values** - useSelector((state) =>state.todos) state ka access chaiye
 variable me values lelo ek baar aagaie uske baad pure JS concept hai 
+
+
+## Task : 
+- Create an Edit button and make the text edit such that your input gets converted to update field with the text of the update todo and Add todo button changes to Update todo
+
+- [ChatGpt link to solution](https://chatgpt.com/share/6842d079-fe78-8007-b203-87062946b23a)

@@ -18,7 +18,7 @@ export const todoSlice = createSlice({
         addTodo: (state, action)=>{ //#NOTE : In redux toolkit we also define not like context only declaration of function
             const todo = {
                 id: nanoid(), // Earlier Date.now()
-                text: action.payload // payload itself a Object so you can access it or text 
+                text: action.payload // payload itself a Object so you can access it
             }
             state.todos.push(todo);
         },  //#NOTE : We always have access to state and action inside the function defination
