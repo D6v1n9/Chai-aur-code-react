@@ -5,7 +5,7 @@ function Input({
   type = "text",    // Password type or anything
   className = "",
   ref, // pull in the ref
-  ...props // everything else
+  ...props // everything else 
 }) {
   const id = useId();
 
