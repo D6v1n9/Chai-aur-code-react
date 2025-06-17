@@ -278,6 +278,8 @@ Always visit the documentation
             }
 
         }
+        const service = new Service()
+        export default service
         ```
 
 ## Using Redux toolkit
@@ -317,6 +319,11 @@ Always visit the documentation
     - ### Assigment create a slice for posts
 
 ## Authentication to be done in App.js
+- ### The main role of App.jsx is to:
+    - Manage global app layout (Header, Footer, main content via Outlet).
+    - Check user authentication state on load using Appwrite.
+    - Show a loading indicator while waiting for the auth status.
+    - Dispatch login/logout to Redux to keep global auth state updated.
 - [Why to use dispatch(logout())](https://grok.com/share/c2hhcmQtMg%3D%3D_39145833-6284-4b3d-b5d2-de67bc5e198c)
 - Do a setup of Provide in main.jsx so that you can run your project
 - ```javascript

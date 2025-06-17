@@ -134,5 +134,16 @@ export class Service {
             fileId
         )
     }
+    // this.bucket.getFilePreview(...) returns a URL object wrapped in a promise. But in your Post component, 
+    // you're using it directly as a string for the src, which will not work.
 
+    getFileView(fileId) {
+        return this.bucket.getFileView(
+            conf.appwriteBucketId,
+            fileId
+        )
+    }
 }
+
+const service = new Service();
+export default service

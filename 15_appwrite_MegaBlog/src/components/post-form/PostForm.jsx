@@ -64,8 +64,10 @@ export default function PostForm({post}) {
             return value
                     .trim() // will remove whitespaces from both end
                     .toLowerCase()
-                    .replace(/^[a-zA-Z\d\s]/g, "-")
-                    .replace(/\s/g, "-")
+                    .replace(/\s+/g, "-")         // Replace all spaces (including multiple) with a single dash
+                    .replace(/[^a-z0-9-]/g, "")   // Remove any character that's not a-z, 0-9, or dash
+                    .replace(/-+/g, "-")          // Replace multiple dashes with one
+                    .replace(/^-+|-+$/g, "");     // Trim leading/trailing dashes
         }
         return ""
     }, [])

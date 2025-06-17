@@ -6,6 +6,7 @@ import {Header, Footer} from "./components"
 import {Outlet} from "react-router-dom"
 import './App.css'
 
+
 function App() {
   // #NOTE good practice
   // Now create a state loading as there may take time for netwrok request like in this case 
@@ -58,7 +59,8 @@ function App() {
       <div className='w-full block'>
         <Header />
         <main>
-          Outlet
+          <Outlet/>
+          {/* Outlet */}
         {/* TODO:  <Outlet /> */}
         </main>
         <Footer />

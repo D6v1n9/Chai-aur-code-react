@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import appwriteService from "../appwrite/config";
-import { useNavigate, useParams } from "react-router-dom";
+import {Link, useNavigate, useParams } from "react-router-dom";
 import {useSelector} from "react-redux"
+import { Container, Button } from "../components/index";
+import parse from "html-react-parser"
 
 // This is for if you want to view a post you created and it will have edit and delete funtionality
 
@@ -20,14 +22,12 @@ export default function Post() {
         if(slug) {
             appwriteService.getPost(slug)
                 .then((post) => {
-                    if(post) {
-                        setPost(post);
-                    }
-                    navigate("/");
+                    if(post) setPost(post)
+                    else navigate("/")
                 })
         } else {
             navigate("/");
-        }
+        }   
     }, [slug, navigate])
 
     const deletePost = () => {
@@ -40,12 +40,15 @@ export default function Post() {
             })
     }
 
+    
+
     return post ? (
         <div className="py-8">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                {/* {post && console.log(appwriteService.getFilePreview(post.featuredImage))} */}
                     <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
+                        src={appwriteService.getFileView(post.featuredImage)}
                         alt={post.title}
                         className="rounded-xl"
                     />
