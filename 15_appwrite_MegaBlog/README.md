@@ -1084,7 +1084,266 @@ Always visit the documentation
         }
         ```
 - ## Creation of pages
-    
+- ### Signup.jsx
+    - ```javascript
+        import React from "react";
+        import {Signup as SignupComponent} from "../components/index"
+
+        function Signup() {
+            return (
+                <div className="py-8">
+                    <SignupComponent/>
+                </div>
+            )
+        }
+
+        export default Signup
+        ```
+- ### Login.jsx
+    - ```javascript
+        import React from "react";
+        import { Login as LoginComponent } from "../components/index";
+
+        function Login() {
+            return (
+                <div className="py-8">
+                    <LoginComponent/>
+                </div>
+            )
+        }
+
+        export default Login
+        ```
+- ### AddPosts.jsx
+    - ```javascript
+        import React from "react";
+        import { Container, PostForm } from "../components/index";
+
+        function AddPost() {
+            return (
+                <div className="py-8">
+                    <Container>
+                        <PostForm/>
+                    </Container>
+                </div>
+            )
+        }
+
+        export default AddPost
+        ```
+- ### AllPosts.jsx
+    - ```javascript
+        import React,{useEffect, useState} from "react";
+        import appwriteService from "../appwrite/config"
+        import { Container, PostCard } from "../components/index";
+
+
+        function Allposts() {
+            const [posts, setPost] = useState([])
+            
+            useEffect(()=>{
+                appwriteService.getPosts([])    // You can pass further queries in getPost([])
+                    .then((posts)=>{
+                        if(posts) {
+                            setPost(posts.documnets)
+                        }
+                    })
+            }, [])
+
+            return (
+                <div className="">
+                    <Container>
+                        <div className="flex flex-wrap">
+                            {posts.map((post) => (
+                                <div key={post.$id} className="p-2 w-1/4">
+                                    <PostCard post={post}/>
+                                </div>
+                            ))}
+                        </div>
+                    </Container>
+                </div>
+            )
+        }
+
+        export default Allposts
+        ```
+- ### EditPost.jsx
+    - ```javascript
+        import React, {useEffect, useState} from "react";
+        import appwriteService from "../appwrite/config"
+        import {Container, PostForm} from "../components/index"
+        import { useNavigate, useParams } from "react-router-dom";
+
+
+        function EditPost() {
+            const [post, setPosts] = useState(null)
+            const {slug} = useParams()
+            const navigate = useNavigate()
+
+            useEffect(() => {
+                if(slug) {
+                    appwriteService.getPost(slug)
+                        .then((post) => {
+                            if(post) {
+                                setPosts(post)
+                            }
+                        })
+                } else {
+                    navigate("/")
+                }
+            }, [slug, navigate]) 
+
+        //  Why it's there: To satisfy React's useEffect dependency rule and prevent linter warnings.
+        //  What happens if you remove it: Likely nothing breaks now, but you'll get an ESLint warning.
+        //  Is it functionally necessary? No — navigate doesn’t change between renders.
+        //  Best practice? Yes, include it to keep the code clean and avoid warnings.
+
+        return post ? (
+                <div className='py-8'>
+                    <Container>
+                        <PostForm post={post} />
+                    </Container>
+                </div>
+        ) : null
+        }
+
+        export default EditPost
+        ```
+- ### Home.jsx
+    - ```javascript
+        import React, { useEffect, useState } from "react";
+        import appwriteService from "../appwrite/config"
+        import {Container, PostCard} from "../components/index"
+
+        function Home() {
+            const [posts, setPosts] = useState([])
+
+            useEffect(() => {
+                appwriteService.getPosts()
+                    .then((posts) => {
+                        if(posts) {
+                            setPosts(posts.document)
+                        }
+                    })
+            }, [])
+            
+            if(posts.length === 0) {
+                return (
+                    <div className="w-full py-8 mt-4 text-center">
+                        <Container>
+                            <div className="flex flex-wrap">
+                                <div className="p-2 w-full">
+                                    <h1 className="text-2xl font-bold hover:text-gray-500">
+                                        Login to read posts
+                                    </h1>
+                                </div>
+                            </div>
+                        </Container>
+                    </div>
+                )
+            }
+
+            // <PostCard post={post} /> // This is also right
+            // This will pass the entire post object as a single prop named post. //{ post: { $id, title, featuredImage } }
+            // But component is expecting { $id, title, featuredImage }
+
+            return (
+                <div className='w-full py-8'>
+                    <Container>
+                        <div className='flex flex-wrap'>
+                            {posts.map((post)=>(
+                                <div key={post.$id} className='p-2 w-1/4'>
+                                    <PostCard {...post}/>     
+                                </div>
+                            ))}
+                        </div>
+                    </Container>
+                </div>
+            )
+        }
+
+
+
+        export default Home
+        ```
+- ### Post.jsx
+    - ```javascript
+        import React, { useEffect, useState } from "react";
+        import appwriteService from "../appwrite/config";
+        import { useNavigate, useParams } from "react-router-dom";
+        import {useSelector} from "react-redux"
+
+        // This is for if you want to view a post you created and it will have edit and delete funtionality
+
+        export default function Post() {
+            const [post, setPost] = useState(null);
+            const navigate = useNavigate();
+            const {slug} = useParams();
+
+            const userData = useSelector((state) => state.auth.userData);
+            // To view the post it created user Must be authenicated
+            
+            // How userData have access to $id figure it out (Please give time to this great way to understand flow)
+            const isAuthor = post && userData ? post.userId === userData.$id : false;
+
+            useEffect(() => {
+                if(slug) {
+                    appwriteService.getPost(slug)
+                        .then((post) => {
+                            if(post) {
+                                setPost(post);
+                            }
+                            navigate("/");
+                        })
+                } else {
+                    navigate("/");
+                }
+            }, [slug, navigate])
+
+            const deletePost = () => {
+                appwriteService.deletePost(post.$id)
+                    .then((status) => {
+                        if(status) {
+                            appwriteService.deleteFile(post.featuredImage);
+                        navigate("/")
+                        }
+                    })
+            }
+
+            return post ? (
+                <div className="py-8">
+                    <Container>
+                        <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                            <img
+                                src={appwriteService.getFilePreview(post.featuredImage)}
+                                alt={post.title}
+                                className="rounded-xl"
+                            />
+
+                            {isAuthor && (
+                                <div className="absolute right-6 top-6">
+                                    <Link to={`/edit-post/${post.$id}`}>
+                                        <Button bgColor="bg-green-500" className="mr-3">
+                                            Edit
+                                        </Button>
+                                    </Link>
+                                    <Button bgColor="bg-red-500" onClick={deletePost}>
+                                        Delete
+                                    </Button>
+                                </div>
+                            )}
+                        </div>
+                        <div className="w-full mb-6">
+                            <h1 className="text-2xl font-bold">{post.title}</h1>
+                        </div>
+                        <div className="browser-css">
+                            {parse(post.content)}
+                            </div>
+                    </Container>
+                </div>
+            ) : null;
+        }
+        ```
 
 
 - ## Interview 

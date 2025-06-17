@@ -83,7 +83,7 @@ export class Service {
     }
 
     // Need to use query in appwrite as we want only those posts which have active status
-    async getPosts() {
+    async getPosts() {      // This will return as listDocuments which will be an array
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
