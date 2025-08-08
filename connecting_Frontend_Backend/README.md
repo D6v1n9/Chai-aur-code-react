@@ -23,11 +23,12 @@ proxy: {
   },
 },
 ```
-- It gets proxied to: `http://localhost:5000/api/api/login` ❌ (duplicate /api)
+- Remember below case 
 ```javascript
 proxy: {
   "/api": "http://localhost:5000/api",
 },
+//It gets proxied to: `http://localhost:5000/api/api/login` ❌ (duplicate /api)
 
 ```
 
