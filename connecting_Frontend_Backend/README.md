@@ -22,6 +22,12 @@ proxy: {
     rewrite: (path) => path.replace(/^\/api/, ""),
   },
 },
+```
+- It gets proxied to: `http://localhost:5000/api/api/login` ❌ (duplicate /api)
+```javascript
+proxy: {
+  "/api": "http://localhost:5000/api",
+},
 
 ```
 
