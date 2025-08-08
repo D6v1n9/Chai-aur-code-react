@@ -7,6 +7,23 @@
 ### At frontend
 - Adding proxy at frontend so that you dont have to write full url only end point 
 - How to use Proxy documentation ar proxy vite
+- If your backend expects routes like /api/login, you should use:
+```javascript
+proxy: {
+  "/api": "http://localhost:5000",
+},
+```
+-  If your backend expects routes like /login (without /api), you can do:
+```javascript
+proxy: {
+  "/api": {
+    target: "http://localhost:5000/api",
+    changeOrigin: true,
+    rewrite: (path) => path.replace(/^\/api/, ""),
+  },
+},
+
+```
 
 ### What is Proxy ?
 - A proxy is like a middleman between your frontend (React/Vite app) and the backend (API server).
