@@ -34,7 +34,7 @@
 
             // We are passing user and setUser so that during Login we can directly access setUser to add value in state of user
             return (
-                <UserContext.Provider value={{data, setData}}>
+                <UserContext.Provider value={{user, setUser}}>
                     {children}
                 </UserContext.Provider>
             )
